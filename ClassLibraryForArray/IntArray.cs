@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
+
 
 namespace ClassLibraryForArray
 {
@@ -12,7 +13,7 @@ namespace ClassLibraryForArray
        private int[] a;    //закрытый одномерный массив
        private int length;      //закрытая длина
 
-        public static FileStream file;
+        private static StreamReader file;
 
         public int Length { get; set; }
         public int this[int i]
@@ -43,8 +44,12 @@ namespace ClassLibraryForArray
         }
         public static IntArray ArrayFromTextFile(string fileName)
         {
-            
-            
+            file = new StreamReader(fileName);
+            IntArray temp = new IntArray();
+            string Arrays= file.ReadLine();
+
+
+                return temp ;
         }
 
         public static int SumArray(IntArray arr)
