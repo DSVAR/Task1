@@ -29,7 +29,7 @@ namespace Task1
             answer = Console.ReadLine();
             try
             {
-                if (Convert.ToInt32(answer) < 0 || Convert.ToInt32(answer) > 4) 
+                if (Convert.ToInt32(answer) < 0 || Convert.ToInt32(answer) > 7) 
                 {
                     Console.WriteLine("Нет такого задания, нажмите enter для продолжения");
                     Console.ReadLine();
@@ -61,6 +61,12 @@ namespace Task1
                         case 4:
                             {
                                 task4();
+                                Menu();
+                                break;
+                            }
+                        case 5:
+                            {
+                                task5();
                                 Menu();
                                 break;
                             }
@@ -143,22 +149,103 @@ namespace Task1
             int[] p = task1();
             IntArray AI=new IntArray();
             AI.a = p;
-         
+            Console.WriteLine("1 или 0, 1 значение +, 0 зачение -");
+            string answer = Console.ReadLine();
+
+
+            IntArray PB=AI;
+            switch (Convert.ToInt32(answer))
+            {
+                case 0:
+                    {
+                        PB = --AI;
+                        break;
+                    }
+                case 1:
+                    {
+                        PB = ++AI;
+                        break;
+                    }
+            }
             
-
-            IntArray PB = ++AI;
-
-            var sw = 0;
-            // IntArray pb = 
+            for(int o = 0; o < PB.a.Length; o++)
+            {
+                Console.Write(o + 1 + ")");
+                Console.WriteLine(PB.a[o]);
+            }
            
 
         }
         static void task5()
         {
+            int cost;
+            int[] p = task1();
+            IntArray AI = new IntArray();
+            AI.a = p;
+            Console.Write("на сколько прибавить/уменьшить каждый эллемент массива?:");
+            string answer = Console.ReadLine();
+
+            cost = Convert.ToInt32(answer);
+
+            Console.WriteLine("1 или 0, 1 значение +, 0 зачение -");
+             answer = Console.ReadLine();
+
+            IntArray PB = AI;
+            switch (Convert.ToInt32(answer))
+            {
+                case 0:
+                    {
+                        PB = AI-cost;
+                        break;
+                    }
+                case 1:
+                    {
+                        PB = AI+cost;
+                        break;
+                    }
+            }
+
+            for (int o = 0; o < PB.a.Length; o++)
+            {
+                Console.Write(o + 1 + ")");
+                Console.WriteLine(PB.a[o]);
+            }
 
         }
         static void task6()
         {
+            int cost;
+            int[] p = task1();
+            IntArray AI = new IntArray();
+            AI.a = p;
+            Console.Write("на сколько прибавить/уменьшить каждый эллемент массива?:");
+            string answer = Console.ReadLine();
+
+            cost = Convert.ToInt32(answer);
+
+            Console.WriteLine("1 или 0, 1 значение +, 0 зачение -");
+            answer = Console.ReadLine();
+
+            IntArray PB = AI;
+            switch (Convert.ToInt32(answer))
+            {
+                case 0:
+                    {
+                        PB = cost-AI ;
+                        break;
+                    }
+                case 1:
+                    {
+                        PB = cost + AI;
+                        break;
+                    }
+            }
+
+            for (int o = 0; o < PB.a.Length; o++)
+            {
+                Console.Write(o + 1 + ")");
+                Console.WriteLine(PB.a[o]);
+            }
 
         }
         static void task7()

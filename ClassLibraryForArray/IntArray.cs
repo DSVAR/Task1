@@ -120,11 +120,12 @@ namespace ClassLibraryForArray
         }
 
 
-        public static IntArray operator ++(IntArray arr)
+        public static IntArray operator ++(IntArray arr)//DONE
         {
             IntArray intArray = new IntArray(arr.a.Length);
             intArray.a = new int[arr.a.Length];
             int sw = 0;
+
             for (int i = 0; i < arr.a.Length; i++)
             {
                  sw = arr.a[i];
@@ -134,20 +135,30 @@ namespace ClassLibraryForArray
             return intArray;
 
         }
-        public static IntArray operator +(IntArray x, int y)
+        public static IntArray operator +(IntArray x, int y)//DONE
         {
-            IntArray temp = new IntArray(x.length);
-            for(int i = 0; i < x.length; i++)
-                temp[i] =x[i]+ y;
-            
+            IntArray temp = new IntArray(x.a.Length);
+            temp.a = new int[x.a.Length];
+            int sw = 0;
+            for(int i = 0; i < x.a.Length; i++)
+            {
+                sw = x.a[i] + y;
+                temp[i] =sw;
+            }
+
             return temp;
         }
 
         public static IntArray operator +(int x, IntArray y)
         {
-            IntArray temp = new IntArray(y.length);
-            for (int i = 0; i < y.length; i++)
-                temp[i] = x + y[i];
+            IntArray temp = new IntArray(y.a.Length);
+            temp.a = new int[y.a.Length];
+            int sw = 0;
+            for (int i = 0; i < y.a.Length; i++)
+            {
+                sw = y.a[i] + x;
+                temp[i] = sw;
+            }
 
             return temp;
         }
@@ -164,31 +175,46 @@ namespace ClassLibraryForArray
         /////////////////////////
         ///
         //1
-        public static IntArray operator --(IntArray arr)
+        public static IntArray operator --(IntArray arr)//DONE
         {
-            IntArray intArray = new IntArray(arr.length);
-            for (int i = 0; i < arr.length; i++)
+
+            IntArray intArray = new IntArray(arr.a.Length);
+            intArray.a = new int[arr.a.Length];
+            int sw = 0;
+
+            for (int i = 0; i < arr.a.Length; i++)
             {
-                intArray[i] = arr.a[i]--;
+                sw = arr.a[i];
+                sw--;
+                intArray[i] = sw;
             }
             return intArray;
-
         }
         //2
-        public static IntArray operator -(IntArray x, int y)
+        public static IntArray operator -(IntArray x, int y)//DONE
         {
-            IntArray temp = new IntArray(x.length);
-            for (int i = 0; i < x.length; i++)
-                temp[i] = x[i] - y;
+            IntArray temp = new IntArray(x.a.Length);
+            temp.a = new int[x.a.Length];
+            int sw = 0;
+            for (int i = 0; i < x.a.Length; i++)
+            {
+                sw = x.a[i] - y;
+                temp[i] = sw;
+            }
 
             return temp;
         }
         //3
-        public static IntArray operator -(int x, IntArray y)
+        public static IntArray operator -(int x, IntArray y)//DONE
         {
-            IntArray temp = new IntArray(y.length);
-            for (int i = 0; i < y.length; i++)
-                temp[i] = x - y[i];
+            IntArray temp = new IntArray(y.a.Length);
+            temp.a = new int[y.a.Length];
+            int sw = 0;
+            for (int i = 0; i < y.a.Length; i++)
+            {
+                sw = y.a[i] - x;
+                temp[i] = sw;
+            }
 
             return temp;
         }
