@@ -165,9 +165,15 @@ namespace ClassLibraryForArray
 
         public static IntArray operator +(IntArray x, IntArray y)
         {
-            int len = x.length < y.length ? x.length : y.length;
+            int len = x.a.Length < y.a.Length ? x.a.Length : y.a.Length;
+            int sw=0;
             IntArray temp = new IntArray(len);
-            for (int i = 0; i < len; i++) temp[i] = x[i] + y[i];
+            temp.a = new int[len];
+            for (int i = 0; i < len; i++)
+            {
+                sw = x.a[i] + y.a[i];
+                temp[i] = sw;
+            }
 
             return temp;
         }
@@ -221,7 +227,7 @@ namespace ClassLibraryForArray
         //4
         public static IntArray operator -(IntArray x, IntArray y)
         {
-            int len = x.length < y.length ? x.length : y.length;
+            int len = x.a.Length< y.a.Length ? x.a.Length : y.a.Length;
             IntArray temp = new IntArray(len);
             for (int i = 0; i < len; i++) temp[i] = x[i] - y[i];
 

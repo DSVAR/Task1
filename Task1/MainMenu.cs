@@ -15,15 +15,15 @@ namespace Task1
        
          
             string answer;
-            Console.WriteLine("С 4 задание по 7, выбрать надо сложение или вычитание 1/0 и откуда брать массив");
+            
+            Console.WriteLine("\r\n"+"С 4 задание по 7, выбрать надо сложение или вычитание 1/0 и откуда брать массив");
             Console.WriteLine("1.Рандомный массив.");
             Console.WriteLine("2.Открыть Массив.");
             Console.WriteLine("3.Сумма массива.");
             Console.WriteLine("4.Увеличить/уменьшить массив на 1.");
             Console.WriteLine("5.Сложение/вычитание скаляра х.");
             Console.WriteLine("6.Сложение/вычитание двух массивов.");
-            Console.WriteLine("7.Сложение/вычитание скаляра Х с У.");
-            Console.WriteLine("4.Очистить консоль.");
+            Console.WriteLine("7.Очистить консоль.");
 
             Console.Write("Выбрать функцию:");
             answer = Console.ReadLine();
@@ -67,6 +67,18 @@ namespace Task1
                         case 5:
                             {
                                 task5();
+                                Menu();
+                                break;
+                            }
+                        case 6:
+                            {
+                                task7();
+                                Menu();
+                                break;
+                            }
+                        case 7:
+                            {
+                                Console.Clear();
                                 Menu();
                                 break;
                             }
@@ -136,6 +148,7 @@ namespace Task1
             IntArray AI = new IntArray();
 
          AI= AI.ArrayFromTextFile(path);
+          
             Console.WriteLine("массив:");
             for(int o=0; o < AI.a.Length; o++)
             {
@@ -167,8 +180,8 @@ namespace Task1
                         break;
                     }
             }
-            
-            for(int o = 0; o < PB.a.Length; o++)
+            Console.WriteLine("\r\n ОТВЕТ:");
+            for (int o = 0; o < PB.a.Length; o++)
             {
                 Console.Write(o + 1 + ")");
                 Console.WriteLine(PB.a[o]);
@@ -204,7 +217,7 @@ namespace Task1
                         break;
                     }
             }
-
+            Console.WriteLine("\r\n ОТВЕТ:");
             for (int o = 0; o < PB.a.Length; o++)
             {
                 Console.Write(o + 1 + ")");
@@ -213,7 +226,7 @@ namespace Task1
 
         }
         static void task6()
-        {
+        {//Тоже самое что и задание 5.. бред какой то.. но оно есть
             int cost;
             int[] p = task1();
             IntArray AI = new IntArray();
@@ -240,7 +253,7 @@ namespace Task1
                         break;
                     }
             }
-
+            Console.WriteLine("\r\n ОТВЕТ:");
             for (int o = 0; o < PB.a.Length; o++)
             {
                 Console.Write(o + 1 + ")");
@@ -250,63 +263,50 @@ namespace Task1
         }
         static void task7()
         {
+            int[] mass1 = task1();
+            int[] mass2 = task1();
 
-        }
+            IntArray MASS1 = new IntArray();
+            MASS1.a = mass1;
+            IntArray MASS2 = new IntArray();
+            MASS2.a = mass2;
 
-
-
-        static void ShortMenu()
-        {
-            IntArray IA = new IntArray();
             string answer;
-            Console.WriteLine("1.Рандомный массив.");
-            Console.WriteLine("2.Открыть Массив.");
-            Console.WriteLine("3/Очистить консоль.");
 
-            Console.Write("Выбрать функцию:");
+            Console.WriteLine("1 или 0, 1 значение +, 0 зачение -");
             answer = Console.ReadLine();
-            try
+            int len = MASS1.a.Length < MASS2.a.Length ? MASS1.a.Length : MASS2.a.Length;
+            
+            IntArray PB = MASS1.a.Length < MASS2.a.Length ? MASS1 : MASS2;
+            PB.Length = len;
+            switch (Convert.ToInt32(answer))
             {
-                if (Convert.ToInt32(answer) < 0 || Convert.ToInt32(answer) > 4)
-                {
-                    Console.WriteLine("Нет такого задания, нажмите enter для продолжения");
-                    Console.ReadLine();
-                    Menu();
-                }
-                else
-                    switch (Convert.ToInt32(answer))
+                case 0:
                     {
-                        case 1:
-                            {
-                                task1();
-
-                                Menu();
-                                break;
-                            }
-                        case 2:
-                            {
-                                task2();
-
-                                Menu();
-                                break;
-                            }
-                        case 3:
-                            {
-                                Console.Clear();
-                                Menu();
-                                break;
-                            }
-                       
+                        PB = MASS1 - MASS2;
+                        break;
+                    }
+                case 1:
+                    {
+                        PB = MASS1 + MASS2;
+                        break;
                     }
             }
-            catch (Exception ex)
+
+            Console.WriteLine("\r\n ОТВЕТ:");
+            for (int o = 0; o < PB.a.Length; o++)
             {
-                Console.WriteLine(ex);
-                Console.WriteLine("нажмите enter для продолжения");
-                Console.ReadLine();
-                Menu();
+                Console.Write(o + 1 + ")");
+                Console.WriteLine(PB.a[o]);
             }
+
+            Console.WriteLine();
+
         }
+
+
+
+     
     }
 }
 
