@@ -3,60 +3,116 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
 namespace ClassLibraryForArray
 {
-    class IntArray
+   public class IntArray
     {
-       private int[] a;    //закрытый одномерный массив
-       private int length;      //закрытая длина
+          //закрытый одномерный массив
+         int length;      //закрытая длина
+        public int[] a;
 
-        private static StreamReader file;
+        private string Patter = @"[0-9]";
+     
+
 
         public int Length { get; set; }
         public int this[int i]
         {
+
             get {
+                
                 if (i >= 0 && i < length) return a[i];
                 else throw new IndexOutOfRangeException();
             }
             set {
-                if (i >= 0 && i < length) a[i] = value;
+              
+                if (i >= 0 && i < length ) a[i] = value;
                 else throw new IndexOutOfRangeException();
             }
         }
+
         public IntArray(int length)
         {
-
+           this.length = length;
         }
         public IntArray(params int[] arr)
         {
-
+           length = arr.Length;
+            a = new int[length];
+            for (int i = 0; i < length; i++) a[i] = arr[i];
         }
        
 
-        public static IntArray RandomIntArray(int length, int a, int b)
+        public  IntArray RandomIntArray(int length, int a, int b)
         {
+            int len = --length;
+            int cos;
+            Random rand = new Random();
+            int[] sw = new int[++length];
 
-            return null;
+            IntArray bip=new IntArray(sw);
+            //bip.Length = length + 1;
+            
+           
+            for(int i = 0; i <= len; i++)
+            {
+                cos = i+ 1;
+               bip[i] = rand.Next(a, b);
+                Console.WriteLine(cos +") "+ bip[i]);
+            }
+            return bip;
         }
-        public static IntArray ArrayFromTextFile(string fileName)
+        public IntArray ArrayFromTextFile(string fileName)
         {
-            file = new StreamReader(fileName);
-            IntArray temp = new IntArray();
-            string Arrays= file.ReadLine();
+            string readtext;
+            int len = 0;
+            int count = 0;
+            int[] arka;
+           
+            using (StreamReader SR = new StreamReader(fileName))
+            {
+                readtext = SR.ReadToEnd();
+            }
+            readtext = readtext.Replace("\r\n", "");
+            readtext = readtext.Replace(" ", "");
+         
+        
 
 
-                return temp ;
+            for (int i = 0; i < readtext.Length; i++)
+                if (Regex.IsMatch(readtext[i].ToString(), Patter)) len++;
+
+
+         //   len++;
+            arka = new int[len];
+
+
+            for (int t = 0; t < readtext.Length; t++)
+            {
+                if (Regex.IsMatch(readtext[t].ToString(), Patter))
+                {
+                    
+                    arka[count] = int.Parse(readtext[t].ToString());
+                    count++;
+                    //Console.WriteLine(arka[t]);
+                }
+            }
+            IntArray temp = new IntArray(arka);
+
+
+
+            return temp;
         }
 
         public static int SumArray(IntArray arr)
         {
             int sum=0;
            
-             for(int i = 0; i > arr.length; i++)
+             for(int i = 0; i < arr.length; i++)
              {
                 sum += arr[i];
              }
@@ -66,10 +122,14 @@ namespace ClassLibraryForArray
 
         public static IntArray operator ++(IntArray arr)
         {
-            IntArray intArray = new IntArray(arr.length);
-            for (int i = 0; i < arr.length; i++)
+            IntArray intArray = new IntArray(arr.a.Length);
+            intArray.a = new int[arr.a.Length];
+            int sw = 0;
+            for (int i = 0; i < arr.a.Length; i++)
             {
-                intArray[i] = arr.a[i]++;
+                 sw = arr.a[i];
+                sw++;
+                intArray[i] = sw;
             }
             return intArray;
 
